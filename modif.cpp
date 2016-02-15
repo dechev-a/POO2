@@ -48,30 +48,34 @@ int	suppr_etudiant(int num_etudiant, etudiant liste[])
     return (-1);
 }
 
-int	add_sigle(std::string sigle, int num_etudiant, etudiant liste[])
+void	add_sigle(etudiant liste[] ,int num_etudiant)
 {
+  std::string sigle;
   int	i;
 
   i = 0;
+  std::cout << "Entrez le sigle du cours à ajouter:" << std::endl;
+  std::cin >> sigle;
+  // TODO Ajouter vérif avec sigle donné (entré en dur)
   while (i < 5 && !liste[num_etudiant].cours[i].empty())
     i++;
   if (i < 5)
     {
       liste[num_etudiant].cours[i] = sigle;
       std::cout << "i vaut : " << i << std::endl;
-      return (1);
     }
-  else
-    return (-1);
+
 }
 
-int	suppr_sigle(std::string sigle, int num_etudiant, int num_cours, etudiant liste[])
+void	suppr_sigle(etudiant liste[], int num_etudiant)
 {
-  if (!liste[num_etudiant].cours[num_cours].empty())
+  std::string sigle;
+  
+  std::cout << "Entrez le sigle du cours à supprimer:" << std::endl;
+  std::cin >> sigle;
+  for (int i =0; i < 5; i++)
     {
-      liste[num_etudiant].cours[num_cours].clear();
-      return (1);
+      if (liste[num_etudiant].cours[i] == sigle)
+	liste[num_etudiant].cours[i].empty();
     }
-  else
-    return (-1);
 }
