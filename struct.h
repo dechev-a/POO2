@@ -55,4 +55,8 @@ void		set_cours(etudiant liste[], int num_etudiant, std::string cours[]);
 
 // Dans handler.cpp
 void		handle_modif(etudiant liste[]);
+
+// Dans check.pp
+bool		check_birthdate(std::string str);
+bool		check_sigle(std::string sigle);
 #endif //STRUCT_H_//

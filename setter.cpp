@@ -56,27 +56,6 @@ void		set_country(etudiant liste[], int num_etudiant)
   liste[num_etudiant].country = country;
 }
 
-bool		check_birthdate(std::string str)
-{
-  bool result = true;
-  int	day = 0;
-  int	month = 0;
-  int	year = 0;
-  
-  if (str.length() != 10 || str.find("/") == 0)
-    return false;
-  
-  day = std::stoi(str.substr(0, str.find("/")));
-  month = std::stoi(str.substr(1,str.find("/")));
-  year = std::stoi(str.substr((str.find_last_of("/")) + 1));
-    std::cout << day << std::endl <<  month << std::endl << year << std::endl;
-  if ((day < 1 || day > 31) ||
-      (month < 1 || month > 12) ||
-      (year < 1900 || year > 2100)) 
-    result = false;
-  return result;
-}
-
 void		set_birthdate(etudiant liste[], int num_etudiant)
 {
   std::string birthdate;
