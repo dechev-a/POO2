@@ -6,10 +6,10 @@ NAME= tp1
 
 ALL= $(CC)
 
-CFLAGS= -std=c++11 - Wall -Wextra
+CXXFLAGS= -std=c++11 -Wall -Wextra
 
 $(CC):$(OBJ)
-	g++ -o $(NAME) $(OBJ) -Wall -Wextra
+	g++ -o $(NAME) $(OBJ) $(CXXFLAGS)
 
 
 clean:

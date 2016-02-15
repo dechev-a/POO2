@@ -56,15 +56,40 @@ void		set_country(etudiant liste[], int num_etudiant)
   liste[num_etudiant].country = country;
 }
 
+bool		check_birthdate(std::string str)
+{
+  bool result = true;
+  int	day = 0;
+  int	month = 0;
+  int	year = 0;
+  
+  if (str.length() != 10 || str.find("/") == 0)
+    return false;
+  
+  day = std::stoi(str.substr(0, str.find("/")));
+  month = std::stoi(str.substr(1,str.find("/")));
+  year = std::stoi(str.substr((str.find_last_of("/")) + 1));
+    std::cout << day << std::endl <<  month << std::endl << year << std::endl;
+  if ((day < 1 || day > 31) ||
+      (month < 1 || month > 12) ||
+      (year < 1900 || year > 2100)) 
+    result = false;
+  return result;
+}
+
 void		set_birthdate(etudiant liste[], int num_etudiant)
 {
   std::string birthdate;
 
-  // TODO: ajouter la vérification de la validité de la date de naissance (chercher les /
-  // cast les données en int puis verif
   std::cout << "Entrez la date de naissance de l'étudiant:" << std::endl;
   std::cin >> birthdate;
-  liste[num_etudiant].birthdate = birthdate;
+  if (check_birthdate(birthdate) == true)
+    liste[num_etudiant].birthdate = birthdate;
+  else
+    {
+      std::cout << "La date rentrée n'est pas au format jj/mm/aaaa, veuillez recommencer" << std::endl << std::endl;
+      set_birthdate(liste, num_etudiant);
+    }
 }
 
 void		set_cours(etudiant liste[], int num_etudiant, std::string cours[])
