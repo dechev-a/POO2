@@ -29,11 +29,12 @@ int	main()
   handle_function[0] = handle_modif;
   handle_function[1] = print_all;
   liste[0].name = "toto";
-  std::cout << "1: Modifier les données d'un étudiant" << std::endl
-	    << "2: Consulter la liste des étudiants" << std::endl
-	    << "0: Quitter le programme" << std::endl;
   while(tmp != "0")
     {
+
+      std::cout << "1: Modifier les données d'un étudiant" << std::endl
+	    << "2: Consulter la liste des étudiants" << std::endl
+	    << "0: Quitter le programme" << std::endl;
       std::cout << ">";
       std::cin >> tmp;
       i = std::stoi(tmp);

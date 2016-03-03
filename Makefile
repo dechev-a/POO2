@@ -1,4 +1,4 @@
-SRC=getter.cpp main.cpp modif.cpp print.cpp setter.cpp handler.cpp
+SRC=getter.cpp main.cpp modif.cpp print.cpp setter.cpp handler.cpp check.cpp
 
 OBJ=$(subst .cpp,.o,$(SRC))
 
