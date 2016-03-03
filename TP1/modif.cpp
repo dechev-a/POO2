@@ -56,14 +56,22 @@ void	add_sigle(etudiant liste[] ,int num_etudiant)
   i = 0;
   std::cout << "Entrez le sigle du cours à ajouter:" << std::endl;
   std::cin >> sigle;
-  // TODO Ajouter vérif avec sigle donné (entré en dur)
-  while (i < 5 && !liste[num_etudiant].cours[i].empty())
-    i++;
-  if (i < 5)
+  if (check_sigle(sigle))
     {
-      liste[num_etudiant].cours[i] = sigle;
-      std::cout << "i vaut : " << i << std::endl;
+      while (i < 5 && !liste[num_etudiant].cours[i].empty())
+	i++;
+      if (i < 5)
+	{
+	  liste[num_etudiant].cours[i] = sigle;
+	  std::cout << "i vaut : " << i << std::endl;
+	}
+      else
+	{
+	  std::cout << "L'étudiant est déjà inscrit à 5 cours, vous devez en supprimer un avant de l'inscrire à un nouveau cours" << std::endl;
+	}
     }
+  else
+    std::cout << "Ce sigle ne fait pas parti des sigles autorisés" << std::endl;
 
 }
 

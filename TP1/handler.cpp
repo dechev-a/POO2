@@ -22,19 +22,19 @@ void		handle_modif(etudiant liste[])
 
   modif = 0;
   num_etudiant = 0;
-  std::cout << "Tapez:" << std::endl;
-  std::cout << "0: Modifier le nom d'un étudiant" << std::endl;
-  std::cout << "1: Modifier le prénom d'un étudiant" << std::endl;
-  std::cout << "2: Modifier le numéro de rue d'un étudiant" << std::endl;
-  std::cout << "3: Modifier le nom de rue d'un étudiant" << std::endl;
-  std::cout << "4: Modifier la ville d'un étudiant" << std::endl;
-  std::cout << "5: Modifier le pays d'un étudiant" << std::endl;
-  std::cout << "6: Modifier la date de naissance d'un étudiant" << std::endl;
-  std::cout << "7: Ajouter un cours àl'étudiant" << std::endl;
-  std::cout << "8: Supprimer un cours de l'étudiant" << std::endl;
-  std::cout << "-1: Sortir de la section modification" << std::endl;
   while (modif != -1)
     {
+      std::cout << "Tapez:" << std::endl;
+      std::cout << "0: Modifier le nom d'un étudiant" << std::endl;
+      std::cout << "1: Modifier le prénom d'un étudiant" << std::endl;
+      std::cout << "2: Modifier le numéro de rue d'un étudiant" << std::endl;
+      std::cout << "3: Modifier le nom de rue d'un étudiant" << std::endl;
+      std::cout << "4: Modifier la ville d'un étudiant" << std::endl;
+      std::cout << "5: Modifier le pays d'un étudiant" << std::endl;
+      std::cout << "6: Modifier la date de naissance d'un étudiant" << std::endl;
+      std::cout << "7: Ajouter un cours àl'étudiant" << std::endl;
+      std::cout << "8: Supprimer un cours de l'étudiant" << std::endl;
+      std::cout << "-1: Sortir de la section modification" << std::endl;
       std::cout << ">";
       std::cin >> tmp;
       modif = std::stoi(tmp);
