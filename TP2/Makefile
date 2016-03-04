@@ -1,4 +1,4 @@
-SRC=main.cpp
+SRC=main.cpp file_manage.cpp 
 
 OBJ=$(subst .cpp,.o,$(SRC))
 
