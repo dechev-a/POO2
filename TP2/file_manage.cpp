@@ -17,16 +17,21 @@ void	read_file(std::list<compte_normal> &l_compte_normal,
   std::string string_compte;
   std::string string_parsing;
   std::vector<std::string> file_to_tab;
-  
-  while (std::getline(file, string_compte, '\n'))
-    {
-       // std::cout << string_compte << std::endl;
-      file_to_tab.push_back(string_compte);
-    }
+  std::vector<std::string> data_to_tab;
+  size_t	pos = 0;
 
-  for (std::string item : file_to_tab)
+  while (std::getline(file, string_compte, '\n'))
+      file_to_tab.push_back(string_compte);
+
+  for (uint i = 0; i < file_to_tab.size(); i++)
     {
-      string_parsing = item.substr(item.find(","), 2);
-      std::cout << string_parsing << std::endl;
+      while ((pos = file_to_tab[i].find(",")) != std::string::npos)
+	{
+	  string_parsing = file_to_tab[i].substr(0, pos);
+	  data_to_tab.push_back(string_parsing);
+	  file_to_tab[i].erase(0, pos + 1);
+	}
+      // CREER LA CLASSE ICI
+      data_to_tab.clear();
     }
-}
+  }
