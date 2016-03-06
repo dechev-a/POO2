@@ -1,6 +1,38 @@
 #include "include.h"
 #include "classe.h"
 
+std::string get_type(type t)
+{
+  switch(t)
+    {
+    default:
+    case A: return "A";
+    case E: return "E";
+    case R: return "R";
+    }
+}
+
+void save_date(std::list<compte_normal *>list)
+{
+  std::ofstream savefile;
+  savefile.open("save.csv");
+  for (compte_normal * item : list)
+    {
+      savefile << item->number << "," <<
+      	get_type(item->type_compte) << "," <<
+      		item->name << "," <<
+      	item->lastname << "," <<
+      	item->birthdate << ",,"<<
+      	item->solde << "," <<
+      	//METTRE COMPTE PARENT SI EXISTE
+      	item->creation_date;
+      for (uint i = 0; i < item->withdrawal_date.size(); i++)
+	 savefile << ',' << item->withdrawal_amount[i] << ',' << item->withdrawal_date[i]; 
+      savefile << std::endl;
+    }
+   savefile.close();
+}
+
 template<typename T>
 void displaylist(std::list<T> list)
 {
@@ -40,6 +72,6 @@ int main()
   */
     read_file(l_compte);
     displaylist(l_compte);
-   
+    save_date(l_compte);
 }
 

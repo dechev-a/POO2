@@ -17,7 +17,7 @@ enum type {
 
 class compte_normal
 {
- protected:
+ public:
   int	number;
   std::string name;
   std::string lastname;

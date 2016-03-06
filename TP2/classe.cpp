@@ -10,17 +10,18 @@ compte_normal::compte_normal(std::vector<std::string> data)
   std::string tmp;
 
   number = std::stoi(data[0]);
-  //type_compte = data[1];
+  type_compte = (type)data[1][0];
   name = data[2];
   lastname = data[3];
   birthdate = data[4];
   solde = std::stof(data[6]);
   creation_date = data[7];
-  if (data.size() > 8)
+    if (data.size() > 8)
     {
       for (uint i = 8; i < data.size(); i = i + 2)
-	add_to_history(data[i], data[i + 1]);
-    }
+	if (i + 1 < data.size())
+	  add_to_history(data[i], data[i + 1]);
+      	}
   /*  number = 0;
   name = "toto";
   birthdate = "12/12/12";
@@ -51,6 +52,7 @@ void	compte_normal::get_money(float money){
 
 void	compte_normal::add_to_history(std::string amount, std::string date)
 {
+  std::cout << "AMOUNT = " << amount << " DATE: " << date << std::endl;
   withdrawal_amount.push_back(std::stof(amount));
   withdrawal_date.push_back(date);
 }
