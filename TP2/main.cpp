@@ -1,4 +1,17 @@
 #include "include.h"
+#include "classe.h"
+
+compte_normal * factory(type t, std::vector<std::string> data)
+{
+  switch(t)
+    {
+    default:
+    case type::A : return new compte_normal(data);
+    case type::E : return new compte_enfant(data);
+    case type::R : return new compte_epargne(data);
+    }
+}
+
 
 int main()
 {

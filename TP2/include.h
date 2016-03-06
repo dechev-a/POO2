@@ -14,6 +14,7 @@
 class compte_enfant;
 class compte_epargne;
 */
+
 void read_file(std::list<compte_normal> &,
 	       std::list<compte_enfant> &,
 	       std::list<compte_epargne> &);

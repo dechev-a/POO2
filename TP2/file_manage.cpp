@@ -31,6 +31,14 @@ void	read_file(std::list<compte_normal> &l_compte_normal,
 	  data_to_tab.push_back(string_parsing);
 	  file_to_tab[i].erase(0, pos + 1);
 	}
+      //Simple boucle d'analyse de ce qui est reçu dans le tableau
+      int x = 0;
+      for (std::string tmp : data_to_tab)
+	{
+	  std::cout << "data_to_tab[ "<< x << "] >> " << tmp << " << end" << std::endl;
+	  x++;
+	}
+      std::cout << "\n\n\n" << std::endl;
       // CREER LA CLASSE ICI
       data_to_tab.clear();
     }

@@ -1,4 +1,13 @@
-#include "include.h"
+#ifndef CLASSE_H_
+#define CLASSE_H_
+
+#include <string.h>
+#include <iostream>
+#include <fstream>
+#include <list>
+#include <vector>
+#include <sstream> 
+//#include "include.h"
 
 enum type {
   A,
@@ -6,73 +15,45 @@ enum type {
   R
 };
 
-class compte
+class compte_normal
 {
-public:
+ protected:
   int	number;
   std::string name;
+  std::string lastname;
   std::string birthdate;
   float solde;
   type type_compte;
+  std::string creation_date;
+  std::vector<std::string> withdrawal_date;
+  std::vector<float> withdrawal_amount;
   
-  float get_solde(){return solde;};
-  compte(){};
-  virtual ~compte(){}
-};
-
- class compte_normal : public compte
-{
  public:
-   void	set_money(float money){
-    solde = solde + money;
-  };
-   virtual void	get_money(float money){
-    if ((solde - money) > 0)
-      solde = solde - money;
-    else
-      std::cout << "Solde incorrect: opération annulée" <<std::endl;
-  };
-
- compte_normal()
-      {
-	number = 0;
-	name = "toto";
-	birthdate = "12/12/12";
-	solde = 12.5;
-	std::cout << "Création compte normal" << std::endl;
-	type_compte = A;
-      };
-  virtual ~compte_normal(){};
+  float get_solde(){return solde;};
+  void	set_money(float money);
+  virtual void	get_money(float money);
+  void	add_to_history(std::string amount, std::string date);
+  compte_normal();
+  compte_normal(std::vector<std::string> data);
+  virtual ~compte_normal();
 };
 
 class compte_enfant : public compte_normal
 {
  public:
-   compte_normal  compte_parent;
+  int  compte_parent;
+  float daily_withdrawal;
+  float monthly_withdrawal;
   
- public:
-  void get_money(float money)
-  {
-    // TODO: Gestion des retrais par jours.
-  }
-  compte_enfant(const compte_normal &compte){
-     std::cout << "Création enfant" << std::endl;
-     this->compte_parent = compte;
-     type_compte = E;
-     };
-   virtual ~compte_enfant(){};
+  void get_money(float money);
+  compte_enfant(std::vector<std::string> data);
 };
 
 class compte_epargne : public compte_normal
 {
-  void get_money(float money){
-    // Autorisation du banquier
-  };
-  /* compte_epargne() */
-  /*   { */
-  /*     type_compte = R; */
-  /*   }; */
-  /* virtual ~compte_epargne(){}; */
+ public:
+  compte_epargne(std::vector<std::string> data);
+  void get_money(float money);
 };
 
-//#endif
+#endif
