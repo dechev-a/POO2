@@ -4,14 +4,12 @@
 // class compte_epargne;
 
 // enum compte {
-//   compte_normal,
-//   compte_enfant,
-//   compte_epargne
+//   A = 65,
+//   E = 69,
+//   R = 82
 // };
 
-void	read_file(std::list<compte_normal> &l_compte_normal,
-		  std::list<compte_enfant> &l_compte_enfant,
-		  std::list<compte_epargne> &l_compte_epargne)
+void	read_file(std::list<compte_normal *> &l_compte)
 {
   std::ifstream file ("banque.csv");
   std::string string_compte;
@@ -19,7 +17,8 @@ void	read_file(std::list<compte_normal> &l_compte_normal,
   std::vector<std::string> file_to_tab;
   std::vector<std::string> data_to_tab;
   size_t	pos = 0;
-
+  type type_compte;
+  
   while (std::getline(file, string_compte, '\n'))
       file_to_tab.push_back(string_compte);
 
@@ -40,6 +39,47 @@ void	read_file(std::list<compte_normal> &l_compte_normal,
 	}
       std::cout << "\n\n\n" << std::endl;
       // CREER LA CLASSE ICI
+
+      type_compte = (type)data_to_tab[1][0];
+      compte_normal * test = factory(type_compte, data_to_tab);
+      l_compte.push_back(test);
+      // switch (type_compte)
+      // 	{
+      // 	case type::A:
+      // 	  {
+      // 	    l_compte_normal.push_back(*test);
+      // 	    break;
+      // 	  }
+      // 	case type::E: {
+      // 	  l_compte_enfant.push_back(dynamic_cast<compte_enfant>(test));
+      // 	  break;
+      // 	}
+      // 	case type::R: {
+      // 	  // l_compte_epargne.push_back(*test);
+      // 	  break;
+      // 	}
+      // 	default:
+      // 	  std::cout << "Error: impossible d'enregistrer le compte" << std::endl;
+      // 	} 
+      // l_compte_normal.push_back(*test);
+      //if (test == compte_normal)
+      //std::cout << "AZERTY" << std::endl;
+      // switch(test)
+      // 	{
+      // 	case compte_normal:
+      // 	  {
+      // 	  // l_compte_normal.push_back()
+      // 	  std::cout << "compte normal" << std::endl;
+      // 	  break;
+      // 	  }
+      // 	case compte_normal::compte_enfant: {
+      // 	  std::cout << "compte enfant" << std::endl;
+      // 	  break;
+      // 	}
+      // 	case compte_normal::compte_epargne: {
+      // 	  std::cout << "compte epargne" << std::endl;
+      // 	  break;
+      // 	}
       data_to_tab.clear();
     }
   }

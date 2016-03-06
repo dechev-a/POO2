@@ -1,6 +1,16 @@
 #include "include.h"
 #include "classe.h"
 
+template<typename T>
+void displaylist(std::list<T> list)
+{
+  for (auto item : list)
+    {
+      std::cout << item->get_solde() << std::endl;
+    }
+}
+
+
 compte_normal * factory(type t, std::vector<std::string> data)
 {
   switch(t)
@@ -20,13 +30,16 @@ int main()
   compte_enfant test2(test);
   */
 
-  std::list<compte_normal> l_compte_normal;
-  std::list<compte_enfant> l_compte_enfant;
+  std::list<compte_normal *> l_compte;
+  /*  std::list<compte_enfant> l_compte_enfant;
   std::list<compte_epargne> l_compte_epargne;
-  
+  */
   /*  test3.number = 12034567;
   std::cout << test.get_solde() << std::endl;
   std::cout << test2.compte_parent.number << std::endl;
   */
-    read_file(l_compte_normal, l_compte_enfant, l_compte_epargne);
+    read_file(l_compte);
+    displaylist(l_compte);
+   
 }
+

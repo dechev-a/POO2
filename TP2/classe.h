@@ -10,9 +10,9 @@
 //#include "include.h"
 
 enum type {
-  A,
-  E,
-  R
+  A = 65,
+  E = 69,
+  R = 82
 };
 
 class compte_normal
