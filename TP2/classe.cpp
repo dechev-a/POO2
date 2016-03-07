@@ -14,20 +14,16 @@ compte_normal::compte_normal(std::vector<std::string> data)
   name = data[2];
   lastname = data[3];
   birthdate = data[4];
-  solde = std::stof(data[6]);
-  creation_date = data[7];
-    if (data.size() > 8)
+  solde = std::stof(data[6].c_str());
+
+  if (data.size() > 7)
     {
-      for (uint i = 8; i < data.size(); i = i + 2)
+      for (uint i = 7; i < data.size(); i = i + 2)
 	if (i + 1 < data.size())
-	  add_to_history(data[i], data[i + 1]);
-      	}
-  /*  number = 0;
-  name = "toto";
-  birthdate = "12/12/12";
-  solde = 12.5;
-  std::cout << "Création compte normal" << std::endl;
-  type_compte = A;  */
+	  {
+	    add_to_history(data[i + 1], data[i]);
+	  }
+    }
 }
 
 void	compte_normal::set_money(float money)
@@ -63,7 +59,8 @@ compte_normal::~compte_normal()
 
 compte_enfant::compte_enfant(std::vector<std::string> data) : compte_normal(data)
 {
-  compte_parent = std::stoi(data[5]);
+  if (data[5] != "")
+    compte_parent = std::stoi(data[5]);
   //temporaire, necessité de refaire setter via l'historique
   daily_withdrawal = 0;
   monthly_withdrawal = 0;

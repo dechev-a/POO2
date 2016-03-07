@@ -16,18 +16,27 @@ void save_date(std::list<compte_normal *>list)
 {
   std::ofstream savefile;
   savefile.open("save.csv");
+  
   for (compte_normal * item : list)
     {
+
+      std::cout << "SOLDE :" << item->solde << std::endl;
       savefile << item->number << "," <<
       	get_type(item->type_compte) << "," <<
-      		item->name << "," <<
+	item->name << "," <<
       	item->lastname << "," <<
-      	item->birthdate << ",,"<<
-      	item->solde << "," <<
-      	//METTRE COMPTE PARENT SI EXISTE
-      	item->creation_date;
+	item->birthdate << ",";
+
+      //Si ajout du compte parent si compte enfant
+      if (item->type_compte == E)
+	savefile<< dynamic_cast<compte_enfant*>(item)->compte_parent <<",";
+      else
+	savefile <<",";
+
+      savefile << item->solde ;
       for (uint i = 0; i < item->withdrawal_date.size(); i++)
-	 savefile << ',' << item->withdrawal_amount[i] << ',' << item->withdrawal_date[i]; 
+	//std::cout << item->withdrawal_date[i] << std::endl;
+      savefile << ',' << item->withdrawal_date[i] << ',' << item->withdrawal_amount[i]; 
       savefile << std::endl;
     }
    savefile.close();
