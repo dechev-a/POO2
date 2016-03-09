@@ -1,4 +1,5 @@
 #include "classe.h"
+#include "include.h"
 
 //Methodes pour Compte_Normal
 compte_normal::compte_normal()
@@ -48,20 +49,19 @@ void	compte_normal::get_money(float money){
 
 void	compte_normal::add_to_history(std::string amount, std::string date)
 {
-  std::cout << "AMOUNT = " << amount << " DATE: " << date << std::endl;
   withdrawal_amount.push_back(std::stof(amount));
   withdrawal_date.push_back(date);
 }
 compte_normal::~compte_normal()
 {
 }
+
 //Methodes pour Compte_Enfant
 
 compte_enfant::compte_enfant(std::vector<std::string> data) : compte_normal(data)
 {
   if (data[5] != "")
     compte_parent = std::stoi(data[5]);
-  //temporaire, necessité de refaire setter via l'historique
   daily_withdrawal = 0;
   monthly_withdrawal = 0;
 }
@@ -71,20 +71,29 @@ void compte_enfant::get_money(float money)
   std::string tmp;
   std::cout << "Entrez la date du jour au format aaaa-m-j" << std::endl;
   std::cin >> tmp;
-  if (tmp == withdrawal_date.back() && (daily_withdrawal + money) <= 10 && monthly_withdrawal <= 50)
+  //Verification que le mois du retrait est différent de celui du dernier retrait afin de remttre à zéro le compteur mensuel avant le début des tests 
+  if (std::stoi(tmp.substr(tmp.find('-') + 1, 2)) != std::stoi(withdrawal_date.back().substr(withdrawal_date.back().find('-') +1, 2)))
+    monthly_withdrawal = 0;
+  if (tmp == withdrawal_date.back() &&
+      ((daily_withdrawal + money) <= 10) &&
+      (monthly_withdrawal <= (50 - money)))
     {
       add_to_history(std::to_string(money), tmp);
       solde = solde - money;
+      daily_withdrawal += money;
+      monthly_withdrawal += money;
     }
-  else if ((monthly_withdrawal + money) <= 50)//Ajouter vérification mois avec une fonction extérieur retournant un bool
+  else if ((monthly_withdrawal + money) <= 50 &&
+	   (tmp != withdrawal_date.back()))
     {
       daily_withdrawal = 0;
       add_to_history(std::to_string(money), tmp);
       solde = solde - money;
+      daily_withdrawal += money;
+      monthly_withdrawal += daily_withdrawal;
     }
   else
     std::cout << "Solde incorrect: opération annulée" <<std::endl;
-  // TODO: Gestion des retrais par jours.
 }
 
 //Methodes pour Compte_Epargne
@@ -92,6 +101,11 @@ compte_epargne::compte_epargne(std::vector<std::string> data) : compte_normal(da
 {
 }
 
-void compte_epargne::get_money(float money){
+void compte_epargne::get_money(float money)
+{
   // Autorisation du banquier
+  if(autorisation(money))
+    compte_normal::get_money(money);
+  else
+    std::cout << "Votre banquier a refuser cette transaction" << std::endl;
 }

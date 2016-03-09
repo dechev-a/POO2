@@ -12,15 +12,13 @@ std::string get_type(type t)
     }
 }
 
-void save_date(std::list<compte_normal *>list)
+void save_data(std::list<compte_normal *>list)
 {
   std::ofstream savefile;
-  savefile.open("save.csv");
+  savefile.open("banque.csv");
   
   for (compte_normal * item : list)
     {
-
-      std::cout << "SOLDE :" << item->solde << std::endl;
       savefile << item->number << "," <<
       	get_type(item->type_compte) << "," <<
 	item->name << "," <<
@@ -35,20 +33,10 @@ void save_date(std::list<compte_normal *>list)
 
       savefile << item->solde ;
       for (uint i = 0; i < item->withdrawal_date.size(); i++)
-	//std::cout << item->withdrawal_date[i] << std::endl;
-      savefile << ',' << item->withdrawal_date[i] << ',' << item->withdrawal_amount[i]; 
+	savefile << ',' << item->withdrawal_date[i] << ',' << item->withdrawal_amount[i]; 
       savefile << std::endl;
     }
-   savefile.close();
-}
-
-template<typename T>
-void displaylist(std::list<T> list)
-{
-  for (auto item : list)
-    {
-      std::cout << item->get_solde() << std::endl;
-    }
+  savefile.close();
 }
 
 
@@ -66,21 +54,10 @@ compte_normal * factory(type t, std::vector<std::string> data)
 
 int main()
 {
-  /*compte_normal test;
-  compte_normal test3;
-  compte_enfant test2(test);
-  */
-
   std::list<compte_normal *> l_compte;
-  /*  std::list<compte_enfant> l_compte_enfant;
-  std::list<compte_epargne> l_compte_epargne;
-  */
-  /*  test3.number = 12034567;
-  std::cout << test.get_solde() << std::endl;
-  std::cout << test2.compte_parent.number << std::endl;
-  */
-    read_file(l_compte);
-    displaylist(l_compte);
-    save_date(l_compte);
+
+  read_file(l_compte);
+  main_menu(l_compte);
+  save_data(l_compte);
 }
 
